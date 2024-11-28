@@ -1,25 +1,60 @@
 {% extends "base.html" %}
 {% block content %}
-<main class="content">
-    <div class="welcome-container">
-        <h1>Welcome to your Dashboard!</h1>
-        <p>This is the main page where you can navigate to different sections like desk control, charts, modes, and profile settings.</p>
-    </div>
 
-    <div class="main-container">
-        <div class="container">
-            <div class="button-container">
-                <button class="control-button">Sitting</button>
-                <button class="control-button">Standing</button>
-                <button class="control-button">Break</button>
-                <button class="control-button">Lunch</button>
+<div class="row">
+    <div class="col-5">
+        <img src="https://www.davidgunter.com/wordpress/wp-content/uploads/2020/07/3-workdesk-mechanism-791x1024.png" alt="" style="width:100%">
+    </div>
+    <div class="col-6">
+        <div class="container-buttons">
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                        This is some text within a card body.
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                        This is some text within a card body.
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                        This is some text within a card body.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p></p>
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                        This is some text within a card body.
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                        This is some text within a card body.
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                        This is some text within a card body.
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="image-container">
-            <img src="./assets/mydesk.png" alt="Desk" class="desk-image">
-        </div>
     </div>
-    
-    <div class="placeholder">This is a placeholder</div>
-</main>
+</div>
 {% endblock content %}
