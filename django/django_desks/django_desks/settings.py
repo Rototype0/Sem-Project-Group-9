@@ -39,8 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'home.apps.HomeConfig',
     'desk_controller.apps.DeskControllerConfig',
-    'authentication.apps.AuthenticationConfig', 
-    'authentication',
+    'user_authentication.apps.UserAuthenticationConfig', 
 ]
 
 MIDDLEWARE = [
