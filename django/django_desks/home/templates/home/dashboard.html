@@ -3,21 +3,29 @@
 
 <div class="row">
     <div class="col-5">
-        <input type="range" id="myRange" value="10" min="0" max="10" oninput="range()" style="
-            position: relative;
-            top: 100px;
-            writing-mode: vertical-lr;
-            height: 430px;
-            direction: rtl;
-            vertical-align: middle;">
-        <img src="https://i.imgur.com/OhjIcCI.png" alt="" style="
-        position: absolute;
-        top: 100px;
-        left: 50px;
-        width: 90%;">
-        <img src="https://i.imgur.com/ve6pMgy.png" id="DeskTop" alt="" style="
+        <input type="range" id="myRange" list="markers" value="20" min="0" max="20"  oninput="range()">
+        <datalist id="markers">
+            <option value="0"></option>
+            <option value="2"></option>
+            <option value="4"></option>
+            <option value="6"></option>
+            <option value="8"></option>
+            <option value="10"></option>
+            <option value="12"></option>
+            <option value="14"></option>
+            <option value="16"></option>
+            <option value="18"></option>
+            <option value="20"></option>
+        </datalist>
+
+        <img src="https://i.imgur.com/Hx4gwKw.png" alt="" style="
             position: absolute;
-            top: 200px;
+            top: 100px;
+            left: 50px;
+            width: 90%;">
+        <img src="https://i.imgur.com/k6LHgPI.png" id="DeskTop" alt="" style="
+            position: absolute;
+            top: -180px;
             left: 50px;
             width: 90%;">  
     </div>
@@ -84,7 +92,7 @@
     function range() 
     {
         target_position = Math.abs(document.getElementById("myRange").value - document.getElementById("myRange").max);
-        target_position = target_position * 10;
+        target_position = target_position * (100 / document.getElementById("myRange").max);
         //alert("current pos:" + parseInt(image.style.transform.substring(15,image.style.transform.length-3)) +"target pos" + target_position*5)
     }
 
