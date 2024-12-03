@@ -38,8 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'home.apps.HomeConfig',
-    'desk_controller.apps.DeskControllerConfig',
-    'user_authentication.apps.UserAuthenticationConfig', 
+    'desk_controller.apps.DeskControllerConfig'
 ]
 
 MIDDLEWARE = [
