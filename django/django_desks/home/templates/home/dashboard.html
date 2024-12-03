@@ -3,19 +3,21 @@
 
 <div class="row">
     <div class="col-5">
-        <input type="range" id="myRange" value="20" min="0" max="20" oninput="range()" style="
+        <input type="range" id="myRange" value="10" min="0" max="10" oninput="range()" style="
+            position: relative;
+            top: 100px;
             writing-mode: vertical-lr;
             height: 430px;
             direction: rtl;
             vertical-align: middle;">
         <img src="https://i.imgur.com/OhjIcCI.png" alt="" style="
         position: absolute;
-        top: 0px;
+        top: 100px;
         left: 50px;
         width: 90%;">
         <img src="https://i.imgur.com/ve6pMgy.png" id="DeskTop" alt="" style="
             position: absolute;
-            top: 100px;
+            top: 200px;
             left: 50px;
             width: 90%;">  
     </div>
@@ -74,42 +76,42 @@
 
 <script>
     const image = document.getElementById('DeskTop');
-    let movement_speed = 1
+    let movement_speed = 2
     let current_movement_speed = movement_speed;
     let current_pos = 50;
     let target_position = 1;
 
     function range() 
     {
-        target_position = Math.abs(document.getElementById("myRange").value - 20);
-        
+        target_position = Math.abs(document.getElementById("myRange").value - document.getElementById("myRange").max);
+        target_position = target_position * 10;
         //alert("current pos:" + parseInt(image.style.transform.substring(15,image.style.transform.length-3)) +"target pos" + target_position*5)
     }
 
     setInterval( function update_position()
     {
-        if (target_position * 5 - parseInt(image.style.transform.substring(15,image.style.transform.length-3)) < movement_speed + 0.1 && 
-        target_position * 5 - parseInt(image.style.transform.substring(15,image.style.transform.length-3)) > -(movement_speed + 0.1))
+        if (target_position - parseInt(image.style.transform.substring(15,image.style.transform.length-3)) < movement_speed + 0.1 && 
+        target_position - parseInt(image.style.transform.substring(15,image.style.transform.length-3)) > -(movement_speed + 0.1))
         {
             current_movement_speed = 0;
         }
         else
         {
             current_movement_speed = movement_speed;
+            if (target_position > parseInt(image.style.transform.substring(15,image.style.transform.length-3)))
+            {
+                current_movement_speed = Math.abs(current_movement_speed);
+            }
+            else if(target_position < parseInt(image.style.transform.substring(15,image.style.transform.length-3)))
+            {
+                current_movement_speed = Math.abs(current_movement_speed) * -1;
+            }
+
+            current_pos += current_movement_speed
+            let transform = `translate(0px, ${current_pos}px)`;
+            image.style.transform = transform;
         }
 
-        if (target_position * 5 > parseInt(image.style.transform.substring(15,image.style.transform.length-3)))
-        {
-            current_movement_speed = Math.abs(current_movement_speed);
-        }
-        else if(target_position * 5 < parseInt(image.style.transform.substring(15,image.style.transform.length-3)))
-        {
-            current_movement_speed = Math.abs(current_movement_speed) * -1;
-        }
-
-        current_pos += current_movement_speed
-        let transform = `translate(0px, ${current_pos}px)`;
-        image.style.transform = transform;
     },12)
 </script>
 {% endblock content %}
