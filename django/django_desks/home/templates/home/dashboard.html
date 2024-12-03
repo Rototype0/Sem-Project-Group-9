@@ -1,3 +1,4 @@
+
 {% extends "base.html" %}
 {% block content %}
 
@@ -5,27 +6,35 @@
     <div class="col-5">
         <img src="https://www.davidgunter.com/wordpress/wp-content/uploads/2020/07/3-workdesk-mechanism-791x1024.png" alt="" style="width:100%">
     </div>
+    
     <div class="col-6">
         <div class="container-buttons">
             <div class="row">
                 <div class="col">
                     <div class="card">
                         <div class="card-body">
-                        This is some text within a card body.
+                            <h4 class = "card-title">Sitting</h4>
+                            <p class="card-text">120 cm</p>
+                            <a href = "" class ="card-link">Delete Profile</a>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body"> 
+                            <h4 class = "card-title">Standing</h4>
+                            <p class="card-text">160 cm</p>
+                            <a href = "" class ="card-link"> Delete Profile </a>
                         </div>
                     </div>
                 </div>
                 <div class="col">
                     <div class="card">
                         <div class="card-body">
-                        This is some text within a card body.
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card">
-                        <div class="card-body">
-                        This is some text within a card body.
+                            <h4 class="card-title">Lunch</h4>  
+                            <p class="card-text">135 cm</p>  
+                            <a href = "" class ="card-link"> Delete Profile </a>
                         </div>
                     </div>
                 </div>
@@ -33,28 +42,36 @@
             <p></p>
             <div class="row">
                 <div class="col">
+                        <div class="card">
+                            <div class="card-body">
+                            <h4 class = "card-title">{{profile}}</h4>
+                            <a href = "" class ="card-link">Create Profile</a>
+                            </div>
+                        </div>
+                </div>
+                <div class="col">
                     <div class="card">
                         <div class="card-body">
-                        This is some text within a card body.
+                            <h4 class = "card-title">{{profile}}</h4>
+                            <a href = "" class ="card-link">Create Profile</a>
                         </div>
+                        
                     </div>
                 </div>
                 <div class="col">
                     <div class="card">
                         <div class="card-body">
-                        This is some text within a card body.
+                            <h4 class = "card-title">{{profile}}</h4>
+                            <a href = "" class ="card-link">Create Profile</a>
                         </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card">
-                        <div class="card-body">
-                        This is some text within a card body.
-                        </div>
+                        
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 </div>
+
+
 {% endblock content %}
