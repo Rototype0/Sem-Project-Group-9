@@ -1,0 +1,71 @@
+.height-profile-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns */
+    gap: 20px; /* Spacing between cards */
+    padding: 20px;
+    margin: 0 auto;
+    max-width: 960px;
+}
+
+.card {
+    border: 1px solid #ccc;
+    height: 100px;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 200px;
+    margin: 200px auto;
+    text-align: center;
+}
+
+.height-profile-card {
+    border: 1px solid #007bff;
+    width:200px;
+    border-radius: 5px;
+    padding: 15px;
+    margin-top: 10px;
+    background-color: #f8f9fa;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+.height-profile-card h3 {
+    margin: 0 0 10px;
+}
+
+.height-profile-card input {
+    width: 100%;
+    padding: 8px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.height-profile-card button {
+    margin-top: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.height-profile-card button:hover {
+    background-color: #218838;
+}
+
+button {
+    padding: 10px 15px;
+    font-size: 11px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}

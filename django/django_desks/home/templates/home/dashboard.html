@@ -6,6 +6,8 @@
     <div class="col-5">
         <img src="https://www.davidgunter.com/wordpress/wp-content/uploads/2020/07/3-workdesk-mechanism-791x1024.png" alt="" style="width:100%">
     </div>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'bstyle.css' %}">
     
     <!-- <div class="col-6">
         <div class="container-buttons">
@@ -52,11 +54,16 @@
                 
                 <div class="col">//-->
                     <div class="card" data-card-id="123">
-                        <div class="card-body">
-                            <h4 class = "card-title">{{profile}}</h4>
-                            <a href = "" class ="card-link" dataProfileExists = "false" data-card-id="123">Create Profile</a>
+                            <button class ="toggle-profile-btn" dataProfileExists = "false" data-card-id="123">Create Profile</button>
+                            <div class="height-profile-container"></div>
                         </div>
-<!--                        
+
+
+                        <div class="height-profile-grid"></div>
+
+    <script src="{% static 'buttons.js'%}"></script>
+
+    <!--                        
                     </div>
                 </div>
                 <div class="col">
