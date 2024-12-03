@@ -18,10 +18,10 @@
           <input type="email" id="email" value="{{user.email}}" />
 
           <label for="age">Age:</label>
-          <input type="number" id="age" value="30" />
+          <input type="number" id="age" value="{{user.deskuserprofile.age}}" />
 
           <label for="height">Height (cm):</label>
-          <input type="number" id="height" value="175" />
+          <input type="number" id="height" value="{{user.deskuserprofile.height}}" />
 
           <button type="button" id="save-btn">Save</button>
         </form>
