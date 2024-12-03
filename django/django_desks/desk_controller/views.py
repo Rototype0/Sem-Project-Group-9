@@ -42,8 +42,8 @@ def desk_info(request, desk_id):
         second_response.raise_for_status()
         desk_details = second_response.json()
 
-        desk, created = Desk.objects.get_or_create(mac_address=mac_address)
-        desk.name = desk_details.get('name', 'Unknown')
+        desk, created = Desk.objects.get_or_create(mac_address=mac_address,)
+        desk.name = desk_details.get('config', {}).get('name', 'Unknown')
         desk.save()
 
         return JsonResponse({f"desk_{desk_id}": desk_details})

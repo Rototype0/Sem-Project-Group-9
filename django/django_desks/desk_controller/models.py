@@ -1,3 +1,8 @@
 from django.db import models
 
-# Create your models here.
+class Desk(models.Model):
+    mac_address = models.CharField(max_length=17, unique=True)  # Store MAC address
+    name = models.CharField(max_length=500)  # Store desk name
+
+    def __str__(self):
+        return f"Desk {self.mac_address} - {self.name}"
