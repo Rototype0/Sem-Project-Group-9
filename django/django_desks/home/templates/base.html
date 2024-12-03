@@ -45,11 +45,6 @@
                 <li class="nav-item {% if request.resolver_match.url_name == 'dashboard' %} active {% endif %}">
                   <a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a>
                 </li>
-                <li class="nav-item {% if request.resolver_match.url_name == 'charts' %} active {% endif %}">
-                  <a class="nav-link" href="{% url 'charts' %}">Charts</a>
-                </li>
-                <li class="nav-item {% if request.resolver_match.url_name == 'modes' %} active {% endif %}">
-                  <a class="nav-link" href="{% url 'modes' %}">Modes</a>
                 </li>
                 <li class="nav-item {% if request.resolver_match.url_name == 'profile' %} active {% endif %}">
                   <a class="nav-link " href="{% url 'profile' %}">Profile</a>
