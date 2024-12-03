@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% load static %}
+    <link rel="stylesheet" href="{% static 'profilestyle.css' %}">
+
+<div class="container">
+    <main>
+      <section class="profile">
+        <h1>My Profile</h1>
+        <br>
+        <h2>General Information</h2>
+        <form id="user-form">
+          <label for="name">Name:</label>
+          <input type="text" id="name" value="{{user}}" />
+
+          <label for="email">Email:</label>
+          <input type="email" id="email" value="{{user.email}}" />
+
+          <label for="age">Age:</label>
+          <input type="number" id="age" value="{{user.deskuserprofile.age}}" />
+
+          <label for="height">Height (cm):</label>
+          <input type="number" id="height" value="{{user.deskuserprofile.height}}" />
+
+          <button type="button" id="save-btn">Save</button>
+        </form>
+      </section>
+
+      <section class="chart">
+        <h2>Desk Activity Chart</h2>
+        
+        <canvas id="activity-chart"></canvas>
+        <script src="profile.js"></script>
+        <div id="health-tips">
+          <h3>Health Tips</h3> 
+          <h4>Based on a study conducted at the University of Waterloo by Jack Callaghan, 
+            a professor in Waterloo’s Department of Kinesiology who recommends that for an 8h work day, 
+            the ideal sit-stand ratio lies between 1:1 and 1:3.</h4>
+          <p id="tips"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  {% endblock content %}
