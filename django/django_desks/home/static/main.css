@@ -6,9 +6,24 @@ body
 input[type=range]
 {
     position: relative;
-    top: 230px;
+    top: 170px;
     writing-mode: vertical-lr;
-    height: 300px;
+    height: 270px;
     direction: rtl;
     vertical-align: middle;
 }
+datalist 
+{
+    position: relative;
+    top: -100px;
+    left: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+option 
+{
+    padding: 0;
+}
+  
