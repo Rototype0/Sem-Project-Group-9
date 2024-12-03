@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<main class="content">
+    <h1>Welcome!</h1>
+    <p>
+        Deskline Management focuses on improving office well-being through desk usage supervision, incorporating cutting-edge technology for monitoring and adjustments.
+        By using the multitude of features available, you can become one of the many users that improve their health every day by making small but effective changes.
+        Make sure to create an account to use 100% of everything we have to offer you!
+    </p>
+    <section>
+        <h2>Why stand?</h2>
+        <div class="section-container">
+            <div class="text-content">
+                <p>
+                    Studies show prolonged sitting can lead to back pain, obesity, and cardiovascular diseases, while too much standing may cause fatigue and discomfort.
+                    Alternating between sitting and standing during work significantly improves health and productivity.
+                </p>
+                <p>
+                    By reducing strain on the lower back and neck, standing desks help minimize discomfort caused by prolonged sitting.
+                    They encourage better posture, boost blood flow, and reduce fatigue. Standing desks have also been linked to improved energy levels and reduced weight gain.
+                </p>
+            </div>
+            <div class="image-content">
+                <img src="{% static 'images/deskimage.jpeg' %}" alt="Sitting vs Standing">
+            </div>
+        </div>
+    </section>
+    <section>
+        <h2>LINAK</h2>
+        <div class="section-container">
+            <div class="image-content">
+                <img src="{% static 'images/linak-logo.jpg' %}" alt="LINAK Logo">
+            </div>
+            <div class="text-content">
+                <p>
+                    LINAK is a leading innovator in ergonomic solutions, providing motorized desks and advanced systems to ensure comfort and efficiency in workplaces worldwide.
+                </p>
+                <p>
+                    LINAK desks are ergonomic, adjustable, and designed to encourage a healthier, more active work routine, empowering users to prioritize their long-term well-being.
+                </p>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock content %}
