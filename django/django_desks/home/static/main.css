@@ -3,3 +3,12 @@ body
     padding: 64px;
     background: #F9FAF9;
 }
+input[type=range]
+{
+    position: relative;
+    top: 230px;
+    writing-mode: vertical-lr;
+    height: 300px;
+    direction: rtl;
+    vertical-align: middle;
+}
