@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from django.contrib.auth.forms import UserCreationForm
 from .forms import RegisterUserForm
 
+def profile(request):
+    context = {'user': request.user}
+    return render(request, 'authenticate/profile.html', context)
 
 def login_user(request):
     if request.method == "POST":
@@ -41,6 +43,5 @@ def register_user(request):
     else:
         form = RegisterUserForm()
 
-    return render(request, 'authenticate/register_user.html', {
-        'form':form,
-    })
+    context = {'form':form,}
+    return render(request, 'authenticate/register_user.html', context)

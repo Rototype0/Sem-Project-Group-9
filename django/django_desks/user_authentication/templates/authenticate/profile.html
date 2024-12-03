@@ -1,29 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Profile</title>
-    <link rel="stylesheet" href="main.css">
-  
-  </head>
-
-<main class="content">
-    <div class="charts-container">
-        <h1>User Profile</h1>
-    </div>
-</main>
+{% load static %}
+    <link rel="stylesheet" href="{% static 'profilestyle.css' %}">
 
 <div class="container">
-    <header class="navbar">
-      <div class="navbar-logo">Desk Management</div>
-      <nav class="navbar-menu">
-          <a href="dashboard.html">Dashboard</a>
-          <a href="modes.html">Modes</a>
-          <a href="profile.html">My Profile</a>
-      </nav>
-  </header>
     <main>
       <section class="profile">
         <h1>My Profile</h1>
@@ -31,10 +12,10 @@
         <h2>General Information</h2>
         <form id="user-form">
           <label for="name">Name:</label>
-          <input type="text" id="name" value="John Doe" />
+          <input type="text" id="name" value="{{user}}" />
 
           <label for="email">Email:</label>
-          <input type="email" id="email" value="john.doe@example.com" />
+          <input type="email" id="email" value="{{user.email}}" />
 
           <label for="age">Age:</label>
           <input type="number" id="age" value="30" />
