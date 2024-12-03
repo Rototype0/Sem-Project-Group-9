@@ -18,7 +18,7 @@ class DeskUser (models.Model):
     username = models.CharField (max_length = 100, null=False, blank=False)
     height = models.IntegerField (null=False, blank=False) #position_mm?
     fav_height_set = models.OneToOneField(
-        'FavouritePositionsSet', 
+        'FavouritePositionSets', 
         on_delete=models.CASCADE, 
         related_name='user'
     )
@@ -29,7 +29,7 @@ class FavouritePositionSets (models.Model):
 class FavPosition (models.Model):
     desk_height = models.IntegerField (null=False, blank=False)
     fav_position_set = models.ForeignKey(
-        FavouritePositionsSet, 
+        FavouritePositionSets, 
         on_delete=models.CASCADE, 
         related_name='fav_positions'
     )
