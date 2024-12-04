@@ -8,6 +8,13 @@ body
     {
         margin-top: 40px;
     }
+
+    .HeightLabel
+    {
+        position: relative;
+        top:-550px;
+        left:200px;
+    }
 }
 input[type=range]
 {
@@ -33,10 +40,5 @@ option
     padding: 0;
 }
 
-h1
-{
-    position: relative;
-    top:-550px;
-    left:200px;
-}
+
   
