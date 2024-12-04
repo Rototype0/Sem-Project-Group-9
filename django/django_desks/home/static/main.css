@@ -1,29 +1,42 @@
 body
-{   
+{
+    margin-top: 180px;
     padding: 64px;
     background: #F9FAF9;
+
+    .card
+    {
+        margin-top: 40px;
+    }
 }
 input[type=range]
 {
     position: relative;
-    top: 170px;
     writing-mode: vertical-lr;
-    height: 270px;
+    height: 340px;
     direction: rtl;
     vertical-align: middle;
 }
 datalist 
 {
     position: relative;
-    top: -100px;
+    top: -340px;
     left: 25px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
+
 option 
 {
     padding: 0;
+}
+
+h1
+{
+    position: relative;
+    top:-550px;
+    left:200px;
 }
   
