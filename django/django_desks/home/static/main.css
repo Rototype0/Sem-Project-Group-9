@@ -6,13 +6,12 @@ body
 input[type=range]
 {
     position: relative;
-    top: 230px;
+    top: 170px;
     writing-mode: vertical-lr;
-    height: 300px;
+    height: 270px;
     direction: rtl;
     vertical-align: middle;
 }
-
 
 p {
     margin-bottom: 1rem;
@@ -31,4 +30,19 @@ h1 {
 h2 {
     margin-top: 2rem; 
     margin-bottom: 1.5rem; 
+}
+
+datalist 
+{
+    position: relative;
+    top: -100px;
+    left: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+option 
+{
+    padding: 0;
 }
