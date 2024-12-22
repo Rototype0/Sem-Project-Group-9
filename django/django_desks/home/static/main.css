@@ -1,56 +1,61 @@
-:root{
-    --base-color: #faf9f9;
-    --text-color: black;
-}
-
 body
-{   
+{
+    margin-top: 180px;
     padding: 64px;
-    background-color: var(--base-color);
-    color: var(--text-color);
+    background: #F9FAF9;
+
+    .card
+    {
+        margin-top: 40px;
+    }
+
+    .HeightLabel
+    {
+        position: relative;
+        top:-550px;
+        left:200px;
+    }
 }
 input[type=range]
 {
     position: relative;
-    top: 230px;
     writing-mode: vertical-lr;
-    height: 300px;
+    height: 340px;
     direction: rtl;
     vertical-align: middle;
 }
 
-.darkmode{
-    --base-color: #2c2c2c;
-    --text-color: white;
+p {
+    margin-bottom: 1rem;
+    text-align: justify; 
 }
 
+p {
+    font-size: 1.2rem; 
+    line-height: 1.6; 
+}
 
-#dark-mode-toggle{
-    background: transparent;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
+h1 {
+    font-size: 2.5rem; 
+}
+
+h2 {
+    margin-top: 2rem; 
+    margin-bottom: 1.5rem; 
+}
+
+datalist 
+{
+    position: relative;
+    top: -340px;
+    left: 25px;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-#dark-mode-toggle svg{
-    fill: #2c2c2c;
-}
 
-#dark-mode-toggle svg {
-    height: 24px;
-    width: 24px;
-    fill: #e8eaed; 
-}
-
-#dark-mode-toggle svg:last-child{
-    display: none;
-}
-.darkmode #dark-mode-toggle svg:first-child{
-    display: none;
-}
-.darkmode #dark-mode-toggle svg:last-child{
-    display: block;
+option 
+{
+    padding: 0;
 }
