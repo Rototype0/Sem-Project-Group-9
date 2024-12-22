@@ -3,35 +3,31 @@
 
 <div class="row">
     <div class="col-5">
-        
-        <img src="https://i.imgur.com/1yFt2jG.png" alt="" style="
-            position: absolute;
-            top: 0px;
-            left: 80px;
-            width: 85%;">
-        <img src="https://i.imgur.com/4WltLC6.png" id="DeskTop" alt="" style="
-            position: absolute;
-            top: -100px;
-            left: 80px;
-            width: 85%;">  
-        <input type="range" id="myRange" list="markers" value="8" min="0" max="26"  oninput="range()">
+        <input type="range" id="myRange" list="markers" value="20" min="0" max="20"  oninput="range()">
         <datalist id="markers">
-            <option value="0" label="120cm"></option>
-            <option value="2" label="115cm"></option>
-            <option value="4" label="110cm"></option>
-            <option value="6" label="105cm"></option>
-            <option value="8" label="100cm"></option>
-            <option value="10" label="95cm" ></option>
-            <option value="12" label="90cm"></option>
-            <option value="14" label="85cm"></option>
-            <option value="16" label="80cm"></option>
-            <option value="18" label="75cm"></option>
-            <option value="20" label="70cm"></option>
-            <option value="22" label="65cm"></option>
-            <option value="24" label="60cm"></option>
-            <option value="26" label="55cm"></option>
+            <option value="0"></option>
+            <option value="2"></option>
+            <option value="4"></option>
+            <option value="6"></option>
+            <option value="8"></option>
+            <option value="10"></option>
+            <option value="12"></option>
+            <option value="14"></option>
+            <option value="16"></option>
+            <option value="18"></option>
+            <option value="20"></option>
         </datalist>
-        <h1 class ="HeightLabel" id="heightLabel">120cm</h1>
+
+        <img src="https://i.imgur.com/Hx4gwKw.png" alt="" style="
+            position: absolute;
+            top: 100px;
+            left: 50px;
+            width: 90%;">
+        <img src="https://i.imgur.com/k6LHgPI.png" id="DeskTop" alt="" style="
+            position: absolute;
+            top: -180px;
+            left: 50px;
+            width: 90%;">  
     </div>
     <div class="col-6">
         <div class="container-buttons">
@@ -39,25 +35,22 @@
                 <div class="col">
                     <div class="card">
                         <div class="card-body">
-                            Default
+                        This is some text within a card body.
                         </div>
-                        <button class="btn btn-primary" style="background: #1268B3; border-radius: 0%;" onclick="setTargetPosition(70)">Height: 70cm</button>
                     </div>
                 </div>
                 <div class="col">
                     <div class="card">
                         <div class="card-body">
-                            Lowest
+                        This is some text within a card body.
                         </div>
-                        <button class="btn btn-primary" style="background: #1268B3; border-radius: 0%;" onclick="setTargetPosition(55)">Height: 55cm</button>
                     </div>
                 </div>
                 <div class="col">
                     <div class="card">
                         <div class="card-body">
-                            Heighest
+                        This is some text within a card body.
                         </div>
-                        <button class="btn btn-primary" style="background: #1268B3; border-radius: 0%;" onclick="setTargetPosition(120)">Height: 120cm</button>
                     </div>
                 </div>
             </div>
@@ -66,25 +59,22 @@
                 <div class="col">
                     <div class="card">
                         <div class="card-body">
-                            Favorite position
+                        This is some text within a card body.
                         </div>
-                        <button class="btn btn-primary" style="background: #1268B3; border-radius: 0%;" onclick="setTargetPosition(68)">Height: 68cm</button>
                     </div>
                 </div>
                 <div class="col">
                     <div class="card">
                         <div class="card-body">
-                            Favorite position
+                        This is some text within a card body.
                         </div>
-                        <button class="btn btn-primary" style="background: #1268B3; border-radius: 0%;" onclick="setTargetPosition(73)">Height: 73cm</button>
                     </div>
                 </div>
                 <div class="col">
                     <div class="card">
                         <div class="card-body">
-                            Favorite position
+                        This is some text within a card body.
                         </div>
-                        <button class="btn btn-primary" style="background: #1268B3; border-radius: 0%;" onclick="setTargetPosition(98)">Height: 98cm</button>
                     </div>
                 </div>
             </div>
@@ -92,61 +82,18 @@
     </div>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-            <p>Height: </p>
-            <input type="text">
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
 <script>
     const image = document.getElementById('DeskTop');
-    let heightLabel = document.getElementById("heightLabel");
-    let slider = document.getElementById('myRange');
-
-    let movement_speed = 0.5
+    let movement_speed = 2
     let current_movement_speed = movement_speed;
-    let current_pos = 100;
+    let current_pos = 50;
     let target_position = 1;
-    setTargetPosition(70)
-
-    function get_current_height()
-    {
-        return Math.round(120 - map_range(current_pos,0, 100, 0, 65));
-    }
-
-    function map_range(value, low1, high1, low2, high2) 
-    {
-    return low2 + (high2 - low2) * (value - low1) / (high1 - low1);
-    }
-
-    function setTargetPosition(new_target_position)
-    {
-        target_position = new_target_position;
-        target_position = Math.round(map_range(new_target_position,55, 120, 100, 0));
-        
-        //alert(Math.floor(target_position / (100 / slider.max)));
-        slider.value = slider.max - Math.floor(target_position / (100 / slider.max));
-    }
 
     function range() 
     {
-        target_position = Math.abs(slider.value - slider.max);
-        target_position = target_position * (100 / slider.max);
+        target_position = Math.abs(document.getElementById("myRange").value - document.getElementById("myRange").max);
+        target_position = target_position * (100 / document.getElementById("myRange").max);
+        //alert("current pos:" + parseInt(image.style.transform.substring(15,image.style.transform.length-3)) +"target pos" + target_position*5)
     }
 
     setInterval( function update_position()
@@ -171,9 +118,8 @@
             current_pos += current_movement_speed
             let transform = `translate(0px, ${current_pos}px)`;
             image.style.transform = transform;
-            heightLabel.style.transform = transform;
         }
-        heightLabel.innerHTML = get_current_height() + "cm";
+
     },12)
 </script>
 {% endblock content %}
