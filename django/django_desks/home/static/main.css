@@ -1,8 +1,14 @@
+:root{
+    --base-color: #faf9f9;
+    --text-color: #black;
+}
+
 body
 {
     margin-top: 180px;
     padding: 64px;
-    background: #F9FAF9;
+    background-color: var(--base-color);
+    color: var(--text-color);
 
     .card
     {
@@ -23,6 +29,43 @@ input[type=range]
     height: 340px;
     direction: rtl;
     vertical-align: middle;
+}
+
+.darkmode{
+    --base-color: #2c2c2c;
+    --text-color: white;
+}
+
+#dark-mode-toggle{
+    background:transparent;
+    border:none;
+    padding: 10px;
+    cursor:pointer;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#dark-modle-toggle svg {
+    fill: #2c2c2c;
+}
+
+#dark-mode-toggle svg {
+    height: 24px;
+    width: 24px;
+    fill: #e8eaed;
+}
+
+#dark-mode-toggle svg:last-child{
+    display: none;
+}
+
+.darkmode #dark-mode-toggle svg:first-child{
+    display: none;
+}
+
+.darkmode #dark-mode-toggle svg:last-child{
+    display: block;
 }
 
 p {
