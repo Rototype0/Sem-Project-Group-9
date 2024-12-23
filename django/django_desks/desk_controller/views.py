@@ -1,6 +1,5 @@
 from django.shortcuts import render
-import requests
-import json
+import requests, json
 from django.http import JsonResponse
 from .models import Desk
 
@@ -62,7 +61,7 @@ def desk_state_update(request, desk_id):
 
     api_url_2 = f"{api_base_url}{api_key}/desks/{mac_address}/state/"
 
-    state = '[{"position_mm": 1000}]'
+    state = '{"position_mm": 1000}'
 
     requests.put(api_url_2, state)
     response = requests.get(api_url_2)
