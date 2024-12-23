@@ -12,12 +12,25 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'main.css' %}">
 </head>
+
 <body>
     <div class="container">
-        <nav class="navbar navbar-expand-lg fixed-top navbar-dark" style="background-color: #113355;"> 
-            <a class="navbar-brand" href="">
+      {% if messages %}
+        {% for message in messages %}
+        {% endfor %}
+          <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+      {% endif %}
+
+        <nav class="navbar navbar-expand-lg fixed-top navbar-dark" style="background-color: #1268B3;"> 
+            <a class="navbar-brand" href="/">
                 <img src="https://cdn-icons-png.freepik.com/256/12823/12823002.png?semt=ais_hybrid" width="30" height="30" class="d-inline-block align-top" alt="">
                 Desk Manager</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -25,18 +38,26 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
               <ul class="navbar-nav ml-auto">
+                {% if user.is_authenticated %}
                 <li class="nav-item {% if request.resolver_match.url_name == 'dashboard' %} active {% endif %}">
-                  <a class="nav-link" href="{% url 'dashboard' %}">Dashboard <span class="sr-only">(current)</span></a>
+                  <a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a>
+                </li>             
+                <li class="nav-item {% if request.resolver_match.url_name == 'profile' %} active {% endif %}">
+                  <a class="nav-link " href="{% url 'logout' %}">Logout</a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Charts</a>
+                <li class="nav-item {% if request.resolver_match.url_name == 'profile' %} active {% endif %}">
+                  <a class="nav-link " href="{% url 'profile' %}">Profile</a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Modes</a>
+                {% else %}
+                <li class="nav-item {% if request.resolver_match.url_name == 'profile' %} active {% endif %}">
+                  <a class="nav-link " href="{% url 'register_user' %}">Register</a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link " href="#">Profile</a>
+
+                <li class="nav-item {% if request.resolver_match.url_name == 'profile' %} active {% endif %}">
+                  <a class="nav-link " href="{% url 'login' %}">Login</a>
                 </li>
+                {% endif %}
+
               </ul>
             </div>
           </nav>
@@ -44,7 +65,7 @@
         {% block content %}
         {% endblock %}
         
-        <footer class="card-footer fixed-bottom" style="background-color: #113355; border-radius: 0%;">
+        <footer class="card-footer fixed-bottom" style="background-color: #1268B3; border-radius: 0%;">
             <div class="footer-text" style="color: #FFFFFF;">This project was made by Group 9 </div>
         </footer>
     </div>

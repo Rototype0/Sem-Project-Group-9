@@ -1,0 +1,61 @@
+body
+{
+    margin-top: 180px;
+    padding: 64px;
+    background: #F9FAF9;
+
+    .card
+    {
+        margin-top: 40px;
+    }
+
+    .HeightLabel
+    {
+        position: relative;
+        top:-550px;
+        left:200px;
+    }
+}
+input[type=range]
+{
+    position: relative;
+    writing-mode: vertical-lr;
+    height: 340px;
+    direction: rtl;
+    vertical-align: middle;
+}
+
+p {
+    margin-bottom: 1rem;
+    text-align: justify; 
+}
+
+p {
+    font-size: 1.2rem; 
+    line-height: 1.6; 
+}
+
+h1 {
+    font-size: 2.5rem; 
+}
+
+h2 {
+    margin-top: 2rem; 
+    margin-bottom: 1.5rem; 
+}
+
+datalist 
+{
+    position: relative;
+    top: -340px;
+    left: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+
+option 
+{
+    padding: 0;
+}

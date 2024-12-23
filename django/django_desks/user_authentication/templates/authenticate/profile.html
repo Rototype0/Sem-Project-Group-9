@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% load static %}
+    <link rel="stylesheet" href="{% static 'profilestyle.css' %}">
+
+<div class="container">
+    <main>
+      <section class="profile">
+        <h1>My Profile</h1>
+        <br>
+        <h2>General Information</h2>
+        <form id="user-form">
+          <label for="name">Name:</label>
+          <input type="text" class="form-control" id="name" value="{{user}}" />
+
+          <label for="email">Email:</label>
+          <input type="email" class="form-control" id="email" value="{{user.email}}" />
+
+          <label for="age">Age:</label>
+          <input type="number" class="form-control" id="age" value="{{user.deskuserprofile.age}}" />
+
+          <label for="height">Height (cm):</label>
+          <input type="number" class="form-control" id="height" value="{{user.deskuserprofile.height}}" />
+        </form>
+      </section>
+    </main>
+  </div>
+  {% endblock content %}
