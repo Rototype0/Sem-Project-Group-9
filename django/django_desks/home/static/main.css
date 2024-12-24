@@ -46,7 +46,7 @@ input[type=range]
     justify-content: center;
 }
 
-#dark-modle-toggle svg {
+#dark-mode-toggle svg {
     fill: #2c2c2c;
 }
 
@@ -66,6 +66,16 @@ input[type=range]
 
 .darkmode #dark-mode-toggle svg:last-child{
     display: block;
+}
+
+.darkmode .card{
+    background-color: #2c2c2c;
+    color: white;
+}
+
+.dark-card {
+    background-color: #2c2c2c;
+    color: white;
 }
 
 p {
