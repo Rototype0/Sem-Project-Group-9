@@ -2,8 +2,16 @@ document.addEventListener('DOMContentLoaded', () => {
     let darkmode = localStorage.getItem('darkmode');
     const themeSwitch = document.getElementById('dark-mode-toggle');
 
+    const imageSwitch = document.getElementById('DeskTop');
+    const darkTop = themeSwitch.getAttribute('dark-image-top');
+    const lightTop = themeSwitch.getAttribute('light-image-top');
+
     const enableDarkmode = () => {
         document.body.classList.add('darkmode');
+
+        if (imageSwitch){
+            imageSwitch.src = darkTop;
+        }
 
         const cards = document.querySelectorAll('.card');
         cards.forEach(card => {
@@ -16,6 +24,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const disableDarkmode = () => {
         document.body.classList.remove('darkmode');
+
+        if (imageSwitch){
+            imageSwitch.src = lightTop;
+        }
 
         const cards = document.querySelectorAll('.card');
         cards.forEach(card => {
