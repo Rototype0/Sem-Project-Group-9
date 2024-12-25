@@ -1,0 +1,20 @@
+{% extends "base.html %}
+{% block content %}
+     <h1>Welcome Manager</h1>
+    <p>You can manage your team and desk allocations.</p>
+
+    <h2>Meeting Setup</h2>
+    <ul>
+        <li><a href="{% url 'meeting_setup' %}">Create/Modify Meetings</a></li>
+    </ul>
+
+    <h2>Desk Control</h2>
+    <ul>
+        <li><a href="{% url 'desk_control' %}">Control Desks</a></li>
+    </ul>
+
+    <h2>Team Management</h2>
+    <ul>
+        <li><a href="{% url 'team_management' %}">Manage Teams</a></li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "base.html %}
+{% block content %}
+    <h1>Welcome User</h1>
+    <p>You can control your assigned desk.</p>
+
+    <h2>Desk Control</h2>
+    <ul>
+        <li><a href="{% url 'desk_control' %}">Control Your Desk</a></li>
+    </ul>
+
+    <h2>Meeting Schedule</h2>
+    <ul>
+        <li><a href="{% url 'meeting_schedule' %}">View Meetings</a></li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "base.html %}
+{% block content %}
+    <h1>Welcome Cleaner</h1>
+    <p>You are responsible for adjusting desk heights outside working hours.</p>
+
+    <h2>Desk Adjustment</h2>
+    <ul>
+        <li><a href="{% url 'desk_adjustment' %}">Adjust Desk Heights</a></li>
+    </ul>
+
+    <h2>Shift Timing</h2>
+    <ul>
+        <li><a href="{% url 'shift_timing' %}">View Shift Timings</a></li>
+    </ul>
+{% endblock %}
