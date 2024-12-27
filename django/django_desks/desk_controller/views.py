@@ -2,9 +2,12 @@ from django.shortcuts import render
 import requests, json
 from django.http import JsonResponse
 from .models import Desk
+import socket
+import time
+import struct
 
 def fetch_desks(request):
-    api_base_url = "http://localhost:8000/api/v2/"
+    api_base_url = "http://localhost:50/api/v2/"
     
     api_key = "E9Y2LxT4g1hQZ7aD8nR3mWx5P0qK6pV7"
     
@@ -21,7 +24,7 @@ def fetch_desks(request):
 
 
 def desk_info(request, desk_id):
-    api_base_url = "http://localhost:8000/api/v2/"
+    api_base_url = "http://localhost:50/api/v2/"
     api_key = "E9Y2LxT4g1hQZ7aD8nR3mWx5P0qK6pV7"
     api_url = f"{api_base_url}{api_key}/desks/"
 
@@ -46,10 +49,30 @@ def desk_info(request, desk_id):
 
     else:
         return JsonResponse({'error': 'Desk not found or invalid desk_id'}, status=404)
-    
+
+
+def connect_to_pico(server_host_ip):
+    server_port = 4242      # Use the port number the server is listening on
+    # Create a socket object
+    client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+    # Connect to the server
+    client_socket.connect((server_host_ip, server_port))
+    print(f"Connected to server {server_host_ip}:{server_port}")
+    client_socket.send(b'\x01')
+    for i in range(10):
+        msg = client_socket.recv(28)
+        btn_state, pressed, pressed_since_last, potentiometer, light_intensity, temp, humidity = struct.unpack("<BxxxIIffff", msg)
+        print(btn_state, pressed, pressed_since_last, potentiometer, light_intensity, temp, humidity)
+        if i % 6 == 0:
+            client_socket.send(b'\x05')
+    client_socket.send(b'\x02')
+    time.sleep(2)
+    client_socket.close()
+
 def desk_state_update(request, desk_id):
 
-    api_base_url = "http://localhost:8000/api/v2/"
+    api_base_url = "http://localhost:50/api/v2/"
     api_key = "E9Y2LxT4g1hQZ7aD8nR3mWx5P0qK6pV7"
     api_url = f"{api_base_url}{api_key}/desks/"
 
