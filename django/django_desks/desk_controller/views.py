@@ -1,5 +1,5 @@
 from django.shortcuts import render
-import requests, json
+import requests, json, asyncio
 from django.http import JsonResponse
 from .models import Desk
 
@@ -70,3 +70,34 @@ def desk_state_update(request, desk_id):
 
     return JsonResponse({f"desk_{desk_id}_state": updated_data})
 
+import requests
+from django.http import JsonResponse
+
+def update_all_desk_states(request, desk_id):
+    api_base_url = "http://localhost:8000/api/v2/"
+    api_key = "E9Y2LxT4g1hQZ7aD8nR3mWx5P0qK6pV7"
+    api_url = f"{api_base_url}{api_key}/desks/"
+
+    response = requests.get(api_url)
+    response.raise_for_status()
+    desks = response.json()
+
+    results = {} 
+    state = '{"position_mm": 1000}' 
+
+    for desk_id, mac_address in enumerate(desks, start=1):
+        try:
+            
+            api_url_state = f"{api_base_url}{api_key}/desks/{mac_address}/state/"
+            put_response = requests.put(api_url_state, data=state)
+            put_response.raise_for_status()
+
+            get_response = requests.get(api_url_state)
+            get_response.raise_for_status()
+            updated_data = get_response.json()
+
+            results[f"desk_{desk_id}_state"] = updated_data
+        except Exception as e:
+            results[f"desk_{desk_id}_error"] = str(e)
+
+    return JsonResponse({"results": results})
