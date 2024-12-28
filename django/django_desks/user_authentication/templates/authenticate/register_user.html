@@ -21,6 +21,25 @@
         {{ form.as_p }}
             
         <br/>
+        <div>
+          <h4>Select Your Role:</h4>
+          <div style="display: flex; gap: 20px; align-items: center;">
+              <div>
+                  <input type="radio" id="manager" name="role" value="manager">
+                  <label for="manager">Manager</label>
+              </div>
+              <div>
+                  <input type="radio" id="member" name="role" value="member">
+                  <label for="member">Member</label>
+              </div>
+              <div>
+                  <input type="radio" id="cleaner" name="role" value="cleaner">
+                  <label for="cleaner">Cleaner</label>
+              </div>
+          </div>
+      </div>
+      
+      <br/>
 
         <input type="submit" value="Submit" class="btn btn-secondary">
     </form>
