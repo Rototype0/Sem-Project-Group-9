@@ -6,7 +6,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', fetch_desks, name='fetch_desks'),
     path('home/<int:desk_id>/', desk_info, name='desk'),
-    path('home/<int:desk_id>/state/', desk_state_update, name='desk_category_update'),
+    path('home/<int:desk_id>/state/', desk_state_update, name='desk_state_update'),
     path('home/<int:desk_id>/state/all', update_all_desk_states, name='update_all_desk_states'),
     path('user_authentication/', include('django.contrib.auth.urls')),
     path('user_authentication/', include('user_authentication.urls')),
