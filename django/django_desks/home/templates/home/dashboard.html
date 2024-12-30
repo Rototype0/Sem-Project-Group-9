@@ -147,37 +147,6 @@
     const image = document.getElementById('DeskTop');
     let heightLabel = document.getElementById("heightLabel");
     let slider = document.getElementById('myRange');
-
-    GetDeskInfo()
-
-    var url = "http://127.0.0.1:50/api/v2/E9Y2LxT4g1hQZ7aD8nR3mWx5P0qK6pV7/desks/cd:fb:1a:53:fb:e6/state"
-    fetch(url, {
-    method:'GET',
-    headers:{
-        'Content-Type':'application/json',
-        'mode': 'no-cors',
-        'Access-Control-Allow-Origin':'*',
-        'Access-Control-Allow-Methods':'GET, POST, OPTIONS',
-    }, 
-    })
-    .then((response) => {
-        return response.json(); //converts response to json
-    })
-    .then((data) => {
-        console.log('data:',data);
-        heightLabel.innerHTML = 99;
-        //Perform actions with the response data from the view
-    });
-
-    async function GetDeskInfo()
-    {
-        const response = await fetch("http://127.0.0.1:50/api/v2/E9Y2LxT4g1hQZ7aD8nR3mWx5P0qK6pV7/desks/cd:fb:1a:53:fb:e6/state")
-        .then(response => response.json())
-        .then(data => 
-        {
-            heightLabel.innerHTML = 99
-        });
-    }
         
     //heightLabel.innerHTML = 99;
     /*

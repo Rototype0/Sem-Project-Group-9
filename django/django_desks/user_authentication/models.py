@@ -15,7 +15,7 @@ class DeskUserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     age = models.IntegerField(default=20)
     height_cm = models.IntegerField(default=175)
-
+    current_selected_desk_mac_address = models.CharField(max_length=50, default="cd:fb:1a:53:fb:e6")
 
     height1_cm = models.IntegerField(default=100)
     height1_name = models.CharField(max_length=50, default="Default")

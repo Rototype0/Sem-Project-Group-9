@@ -6,7 +6,7 @@ import socket
 import time
 import struct
 
-def fetch_desks(request):
+def fetch_desks():
     api_base_url = "http://localhost:50/api/v2/"
     
     api_key = "E9Y2LxT4g1hQZ7aD8nR3mWx5P0qK6pV7"
@@ -20,7 +20,8 @@ def fetch_desks(request):
 
     desk_dict = {f"desk_{i+1}": desk for i, desk in enumerate(desks)}
     
-    return JsonResponse(desk_dict, safe=False)
+    return desk_dict
+    #return JsonResponse(desk_dict, safe=False)
 
 
 def desk_info(request, desk_id):

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="row">
+    <form action="{% url 'dashboard'%}" method="POST">
+        {% csrf_token %}
+        <div class="form-row align-items-center">
+          <div class="col-auto my-1">
+            <input type="hidden" name="name" value="set_current_desk">
+            <label class="mr-sm-2" for="inlineFormCustomSelect">Select Desk</label>
+            <select name ="desk_drop_menu" class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                {% for desk, mac_address in desks.items %}
+                    <option value="{{mac_address}}">{{desk}}: {{mac_address}}</option>
+                {% endfor %}
+            </select>
+          </div>
+          <div class="col-auto my-1">
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </div>
+      </form>
+</div>
+        
+{% endblock content %}
