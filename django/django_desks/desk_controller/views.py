@@ -70,26 +70,20 @@ def connect_to_pico(server_host_ip):
     time.sleep(2)
     client_socket.close()
 
-def desk_state_update(request, desk_id):
-
+def desk_state_update(mac_address, position_mm):
     api_base_url = "http://localhost:50/api/v2/"
     api_key = "E9Y2LxT4g1hQZ7aD8nR3mWx5P0qK6pV7"
-    api_url = f"{api_base_url}{api_key}/desks/"
 
-    response = requests.get(api_url)
+    api_url = f"{api_base_url}{api_key}/desks/{mac_address}/state/"
+    
+    state = {"position_mm": int(position_mm)}
+    response = requests.put(api_url, json=state)
     response.raise_for_status()
-    desks = response.json()
 
-    mac_address = desks[desk_id - 1]
+    updated_response = requests.get(api_url)
+    updated_response.raise_for_status()
+    updated_data = updated_response.json()
 
-    api_url_2 = f"{api_base_url}{api_key}/desks/{mac_address}/state/"
+    print(updated_data)
 
-    state = '{"position_mm": 1000}'
-
-    requests.put(api_url_2, state)
-    response = requests.get(api_url_2)
-    response.raise_for_status()
-    updated_data = response.json()
-
-    return JsonResponse({f"desk_{desk_id}_state": updated_data})
 

@@ -39,25 +39,40 @@
                 <div class="col">
                     <div class="card">
                         <div class="card-body">
-                            Default
+                            {{name1}}
                         </div>
-                        <button class="btn btn-primary" style="background: #1268B3; border-radius: 0%;" onclick="setTargetPosition(70)">Height: 70cm</button>
+                        <form method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="name" value="set_height1">
+                            <button class="btn btn-primary" type="submit" 
+                            class="btn btn-primary" style="background: #1268B3; border-radius: 0%; width: 100%;" value={{height1}}>Height: {{height1}}cm</button>
+                        </form>
                     </div>
                 </div>
                 <div class="col">
                     <div class="card">
                         <div class="card-body">
-                            Lowest
+                            {{name2}}
                         </div>
-                        <button class="btn btn-primary" style="background: #1268B3; border-radius: 0%;" onclick="setTargetPosition(55)">Height: 55cm</button>
+                        <form method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="name" value="set_height2">
+                            <button class="btn btn-primary" type="submit" 
+                            class="btn btn-primary" style="background: #1268B3; border-radius: 0%; width: 100%;" value={{height2}}>Height: {{height2}}cm</button>
+                        </form>
                     </div>
                 </div>
                 <div class="col">
                     <div class="card">
                         <div class="card-body">
-                            Heighest
+                            {{name3}}
                         </div>
-                        <button class="btn btn-primary" style="background: #1268B3; border-radius: 0%;" onclick="setTargetPosition(120)">Height: 120cm</button>
+                        <form method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="name" value="set_height3">
+                            <button class="btn btn-primary" type="submit" 
+                            class="btn btn-primary" style="background: #1268B3; border-radius: 0%; width: 100%;" value={{height3}}>Height: {{height3}}cm</button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -66,25 +81,40 @@
                 <div class="col">
                     <div class="card">
                         <div class="card-body">
-                            Favorite position
+                            {{name2}}
                         </div>
-                        <button class="btn btn-primary" style="background: #1268B3; border-radius: 0%;" onclick="setTargetPosition(68)">Height: 68cm</button>
+                        <form method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="name" value="set_height4">
+                            <button class="btn btn-primary" type="submit" 
+                            class="btn btn-primary" style="background: #1268B3; border-radius: 0%; width: 100%;" value={{height4}}>Height: {{height4}}cm</button>
+                        </form>
                     </div>
                 </div>
                 <div class="col">
                     <div class="card">
                         <div class="card-body">
-                            Favorite position
+                            {{name5}}
                         </div>
-                        <button class="btn btn-primary" style="background: #1268B3; border-radius: 0%;" onclick="setTargetPosition(73)">Height: 73cm</button>
+                        <form method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="name" value="set_height5">
+                            <button class="btn btn-primary" type="submit" 
+                            class="btn btn-primary" style="background: #1268B3; border-radius: 0%; width: 100%;" value={{height5}}>Height: {{height5}}cm</button>
+                        </form>
                     </div>
                 </div>
                 <div class="col">
                     <div class="card">
                         <div class="card-body">
-                            Favorite position
+                            {{name6}}
                         </div>
-                        <button class="btn btn-primary" style="background: #1268B3; border-radius: 0%;" onclick="setTargetPosition(98)">Height: 98cm</button>
+                        <form method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="name" value="set_height6">
+                            <button class="btn btn-primary" type="submit" 
+                            class="btn btn-primary" style="background: #1268B3; border-radius: 0%; width: 100%;" value={{height6}}>Height: {{height6}}cm</button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -118,62 +148,55 @@
     let heightLabel = document.getElementById("heightLabel");
     let slider = document.getElementById('myRange');
 
-    let movement_speed = 0.5
-    let current_movement_speed = movement_speed;
-    let current_pos = 100;
-    let target_position = 1;
-    setTargetPosition(70)
+    GetDeskInfo()
 
-    function get_current_height()
+    var url = "http://127.0.0.1:50/api/v2/E9Y2LxT4g1hQZ7aD8nR3mWx5P0qK6pV7/desks/cd:fb:1a:53:fb:e6/state"
+    fetch(url, {
+    method:'GET',
+    headers:{
+        'Content-Type':'application/json',
+        'mode': 'no-cors',
+        'Access-Control-Allow-Origin':'*',
+        'Access-Control-Allow-Methods':'GET, POST, OPTIONS',
+    }, 
+    })
+    .then((response) => {
+        return response.json(); //converts response to json
+    })
+    .then((data) => {
+        console.log('data:',data);
+        heightLabel.innerHTML = 99;
+        //Perform actions with the response data from the view
+    });
+
+    async function GetDeskInfo()
     {
-        return Math.round(120 - map_range(current_pos,0, 100, 0, 65));
+        const response = await fetch("http://127.0.0.1:50/api/v2/E9Y2LxT4g1hQZ7aD8nR3mWx5P0qK6pV7/desks/cd:fb:1a:53:fb:e6/state")
+        .then(response => response.json())
+        .then(data => 
+        {
+            heightLabel.innerHTML = 99
+        });
     }
-
-    function map_range(value, low1, high1, low2, high2) 
-    {
-    return low2 + (high2 - low2) * (value - low1) / (high1 - low1);
-    }
-
-    function setTargetPosition(new_target_position)
-    {
-        target_position = new_target_position;
-        target_position = Math.round(map_range(new_target_position,55, 120, 100, 0));
         
-        //alert(Math.floor(target_position / (100 / slider.max)));
-        slider.value = slider.max - Math.floor(target_position / (100 / slider.max));
-    }
-
-    function range() 
-    {
-        target_position = Math.abs(slider.value - slider.max);
-        target_position = target_position * (100 / slider.max);
-    }
-
+    //heightLabel.innerHTML = 99;
+    /*
     setInterval( function update_position()
     {
-        if (target_position - parseInt(image.style.transform.substring(15,image.style.transform.length-3)) < movement_speed + 0.1 && 
-        target_position - parseInt(image.style.transform.substring(15,image.style.transform.length-3)) > -(movement_speed + 0.1))
-        {
-            current_movement_speed = 0;
-        }
-        else
-        {
-            current_movement_speed = movement_speed;
-            if (target_position > parseInt(image.style.transform.substring(15,image.style.transform.length-3)))
-            {
-                current_movement_speed = Math.abs(current_movement_speed);
-            }
-            else if(target_position < parseInt(image.style.transform.substring(15,image.style.transform.length-3)))
-            {
-                current_movement_speed = Math.abs(current_movement_speed) * -1;
-            }
-
-            current_pos += current_movement_speed
-            let transform = `translate(0px, ${current_pos}px)`;
-            image.style.transform = transform;
-            heightLabel.style.transform = transform;
-        }
-        heightLabel.innerHTML = get_current_height() + "cm";
-    },12)
+        fetch('http://127.0.0.1:50/api/v2/E9Y2LxT4g1hQZ7aD8nR3mWx5P0qK6pV7/desks/cd:fb:1a:53:fb:e6/state')
+        .then(function(response) {
+            return response.json();
+        }).then(function(data) {
+            heightLabel.innerHTML = 99;
+        }).catch(function(err) {
+            console.log('Fetch Error :-S', err);
+        });
+            // Access the 'position_mm' parameter from the response data
+            //let transform = `translate(0px, ${data.position_mm}px)`;
+            //image.style.transform = transform;
+            //heightLabel.style.transform = transform;
+            //heightLabel.innerHTML = 99 + "cm";
+    },2000)
+    */
 </script>
 {% endblock content %}
