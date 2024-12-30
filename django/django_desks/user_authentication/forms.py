@@ -15,7 +15,7 @@ class RegisterUserForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2')
+        fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2', 'age', 'height_cm' ,'user_type')
     
     def __init__(self, *args, **kwargs):
         super(RegisterUserForm, self).__init__(*args, **kwargs)
@@ -25,13 +25,13 @@ class RegisterUserForm(UserCreationForm):
         self.fields['password2'].widget.attrs['class'] = 'form-control'
 
     def save(self, commit=True):
+        print("called save")
         user = super(RegisterUserForm, self).save(commit=commit)
-        if commit:
-            # Create or update DeskUserProfile instance
-            DeskUserProfile.objects.create(
-                user=user,
-                age=self.cleaned_data['age'],
-                height_cm=self.cleaned_data['height_cm'],
-                user_type=self.cleaned_data['user_type']
-            )
-        return user
+        print("saved user")
+
+        desk_user = DeskUserProfile.objects.get(user=User.objects.get(id=user.id))
+        desk_user.age = self.cleaned_data['age']
+        desk_user.height_cm=self.cleaned_data['height_cm']
+        desk_user.user_type=self.cleaned_data['user_type']
+        desk_user.save()
+        return desk_user
