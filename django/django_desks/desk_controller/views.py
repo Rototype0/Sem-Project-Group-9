@@ -24,32 +24,17 @@ def fetch_desks():
     #return JsonResponse(desk_dict, safe=False)
 
 
-def desk_info(request, desk_id):
-    api_base_url = "http://localhost:50/api/v2/"
-    api_key = "E9Y2LxT4g1hQZ7aD8nR3mWx5P0qK6pV7"
-    api_url = f"{api_base_url}{api_key}/desks/"
+def desk_info(request, mac_address):
+    if request.method == "GET":
+        api_base_url = "http://localhost:50/api/v2/"
+        api_key = "E9Y2LxT4g1hQZ7aD8nR3mWx5P0qK6pV7"
+        api_url = f"{api_base_url}{api_key}/desks/{mac_address}/state"
 
-    response = requests.get(api_url)
-    response.raise_for_status()
-    desks = response.json()
+        response = requests.get(api_url)
+        response.raise_for_status()
+        desk_details = response.json()
 
-    if isinstance(desks, list) and 1 <= desk_id <= len(desks):
-        mac_address = desks[desk_id - 1]
-
-        second_api_url = f"{api_base_url}{api_key}/desks/{mac_address}/"
-
-        second_response = requests.get(second_api_url)
-        second_response.raise_for_status()
-        desk_details = second_response.json()
-
-        desk, created = Desk.objects.get_or_create(mac_address=mac_address,)
-        desk.name = desk_details.get('config', {}).get('name', 'Unknown')
-        desk.save()
-
-        return JsonResponse({f"desk_{desk_id}": desk_details})
-
-    else:
-        return JsonResponse({'error': 'Desk not found or invalid desk_id'}, status=404)
+        return JsonResponse(desk_details)
 
 
 def connect_to_pico(server_host_ip):
@@ -79,12 +64,6 @@ def desk_state_update(mac_address, position_mm):
     
     state = {"position_mm": int(position_mm)}
     response = requests.put(api_url, json=state)
-    response.raise_for_status()
-
-    updated_response = requests.get(api_url)
-    updated_response.raise_for_status()
-    updated_data = updated_response.json()
-
-    print(updated_data)
+    #response.raise_for_status()
 
 

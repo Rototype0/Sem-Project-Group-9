@@ -11,9 +11,6 @@ def select_desk(request):
             a = request.POST['desk_drop_menu']
             print(a)
         return render(request, 'home/desk_selection.html', {'desks': desks_active})
-    else:
-        messages.error(request, ("User not authenticated"))
-        return redirect('about')
 
 def dashboard(request):
     if request.user.is_authenticated:
@@ -41,6 +38,10 @@ def dashboard(request):
                     current_user.current_selected_desk_mac_address = request.POST.get('desk_drop_menu')
                     print(current_user.current_selected_desk_mac_address)
                     current_user.save()
+                case 'set_custom_height':
+                    print(current_user.current_selected_desk_mac_address)
+                    desk_state_update(current_user.current_selected_desk_mac_address, int(request.POST.get('height')) * 10)
+                    print("Set current height to:" + str(request.POST.get('height')))
                 case 'set_height1':
                     print(current_user.current_selected_desk_mac_address)
                     desk_state_update(current_user.current_selected_desk_mac_address, current_user.height1_cm * 10)
@@ -63,6 +64,8 @@ def dashboard(request):
                 case _:
                     print("no name found")
 
+        context.update({'current_selected_desk_mac_address': current_user.current_selected_desk_mac_address})
+        print("done")
         return render(request, 'home/dashboard.html', context)
     else:
         messages.error(request, ("User not authenticated"))

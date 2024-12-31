@@ -2,36 +2,23 @@
 {% block content %}
 
 <div class="row">
+    
     <div class="col-5">
-        
-        <img src="https://i.imgur.com/1yFt2jG.png" alt="" style="
+        {% load static %} 
+        <img src="{% static 'images/desk_bottom.png' %}" alt="" style="
             position: absolute;
             top: 0px;
             left: 80px;
             width: 85%;">
-        <img src="https://i.imgur.com/4WltLC6.png" id="DeskTop" alt="" style="
+
+        <img src="{% static 'images/desk_top.png' %}" id="DeskTop" alt="" style="
             position: absolute;
             top: -100px;
             left: 80px;
-            width: 85%;">  
-        <input type="range" id="myRange" list="markers" value="8" min="0" max="26"  oninput="range()">
-        <datalist id="markers">
-            <option value="0" label="120cm"></option>
-            <option value="2" label="115cm"></option>
-            <option value="4" label="110cm"></option>
-            <option value="6" label="105cm"></option>
-            <option value="8" label="100cm"></option>
-            <option value="10" label="95cm" ></option>
-            <option value="12" label="90cm"></option>
-            <option value="14" label="85cm"></option>
-            <option value="16" label="80cm"></option>
-            <option value="18" label="75cm"></option>
-            <option value="20" label="70cm"></option>
-            <option value="22" label="65cm"></option>
-            <option value="24" label="60cm"></option>
-            <option value="26" label="55cm"></option>
-        </datalist>
-        <h1 class ="HeightLabel" id="heightLabel">120cm</h1>
+            width: 85%;"> 
+
+        <h1 class ="HeightLabel" id="heightLabel" style="margin-top: 650px;">120cm</h1>
+
     </div>
     <div class="col-6">
         <div class="container-buttons">
@@ -121,51 +108,102 @@
         </div>
     </div>
 </div>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-            <p>Height: </p>
-            <input type="text">
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
-        </div>
-      </div>
+<div class="row" style="margin-top: -350px;">
+    <div class="col-5">
+        <center>
+        <label class="form-label" for="typeNumber">{{current_selected_desk_mac_address}}</label>
+        <h3>Put desk name from db here</h3>
+        <a class="btn btn-primary"style="background: #1268B3; border-radius: 0%; width: 100%; margin-top: -4px;"
+        href="{% url 'desk_selection' %}">Select Another Desk</a>
+        </center>
     </div>
-  </div>
+    <div class="col-6">
+        <form method="POST">
+            {% csrf_token %}
+            <div data-mdb-input-init class="form-outline" style="margin-left:0%;">
+                <input type="hidden" name="name" value="set_custom_height">
+                <label class="form-label" for="typeNumber">Set Custom Height</label>
+                <input value=90 class="form-control" type="number" id="typeNumber" name="height">
+                <button class="btn btn-primary" type="submit" 
+                class="btn btn-primary" style="background: #1268B3; border-radius: 0%; width: 100%;" value={{height1}}>Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
 
 <script>
     const image = document.getElementById('DeskTop');
     let heightLabel = document.getElementById("heightLabel");
-    let slider = document.getElementById('myRange');
-        
-    //heightLabel.innerHTML = 99;
-    /*
+    
+    
+    let movement_speed = 0.25
+    let current_movement_speed = movement_speed;
+    let current_pos = 100;
+    let target_position = 100;
+    let real_desk_position;
+
+    get_current_height()
+
+    async function get_current_height()
+    {
+        const request = await fetch("http://127.0.0.1:8000/home/{{current_selected_desk_mac_address}}")
+        .then(response => response.json())
+        .then(data => console.log(real_desk_position = data.position_mm/10))
+        .catch(err=> console.log(err));
+        target_position = 150 - real_desk_position
+    }
+
+    function map_range(value, low1, high1, low2, high2) 
+    {
+    return low2 + (high2 - low2) * (value - low1) / (high1 - low1);
+    }
+
+    function setTargetPosition(new_target_position)
+    {
+        target_position = new_target_position;
+        target_position = Math.round(map_range(new_target_position,55, 120, 100, 0));
+    }
+
+    setInterval( function get_position_from_api()
+    {
+        get_current_height()
+        if (real_desk_position != null)
+        {
+            heightLabel.innerHTML = real_desk_position + "cm";
+        }
+        else
+        {
+            heightLabel.innerHTML = "~cm"
+        }
+    }, 400)
+
+    
     setInterval( function update_position()
     {
-        fetch('http://127.0.0.1:50/api/v2/E9Y2LxT4g1hQZ7aD8nR3mWx5P0qK6pV7/desks/cd:fb:1a:53:fb:e6/state')
-        .then(function(response) {
-            return response.json();
-        }).then(function(data) {
-            heightLabel.innerHTML = 99;
-        }).catch(function(err) {
-            console.log('Fetch Error :-S', err);
-        });
-            // Access the 'position_mm' parameter from the response data
-            //let transform = `translate(0px, ${data.position_mm}px)`;
-            //image.style.transform = transform;
-            //heightLabel.style.transform = transform;
-            //heightLabel.innerHTML = 99 + "cm";
-    },2000)
-    */
+        if (target_position - parseInt(image.style.transform.substring(15,image.style.transform.length-3)) < movement_speed + 0.1 && 
+        target_position - parseInt(image.style.transform.substring(15,image.style.transform.length-3)) > -(movement_speed + 0.1))
+        {
+            current_movement_speed = 0;
+        }
+        else
+        {
+            current_movement_speed = movement_speed;
+            if (target_position > parseInt(image.style.transform.substring(15,image.style.transform.length-3)))
+            {
+                current_movement_speed = Math.abs(current_movement_speed);
+            }
+            else if(target_position < parseInt(image.style.transform.substring(15,image.style.transform.length-3)))
+            {
+                current_movement_speed = Math.abs(current_movement_speed) * -1;
+            }
+
+            current_pos += current_movement_speed
+            let transform = `translate(0px, ${current_pos}px)`;
+            image.style.transform = transform;
+            heightLabel.style.transform = transform;
+        }
+    },12)
 </script>
 {% endblock content %}
