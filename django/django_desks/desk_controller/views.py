@@ -37,7 +37,7 @@ def desk_info(request, mac_address):
         return JsonResponse(desk_details)
 
 
-def connect_to_pico(server_host_ip):
+'''def connect_to_pico(server_host_ip):
     server_port = 4242      # Use the port number the server is listening on
     # Create a socket object
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -54,7 +54,7 @@ def connect_to_pico(server_host_ip):
             client_socket.send(b'\x05')
     client_socket.send(b'\x02')
     time.sleep(2)
-    client_socket.close()
+    client_socket.close()'''
 
 def desk_state_update(mac_address, position_mm):
     api_base_url = "http://localhost:50/api/v2/"
