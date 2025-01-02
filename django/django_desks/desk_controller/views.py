@@ -72,6 +72,11 @@ def fetch_all_desk_states():
     api_url = f"{api_base_url}{api_key}/desks/"
 
     try:
+        response.get(api_url)
+        desks = response.json()
+        
+
+    try:
         response = requests.get(api_url)
         response.raise_for_status()
         desks = response.json()
@@ -81,9 +86,13 @@ def fetch_all_desk_states():
 
         for mac_address in enumerate(desks, start=1):
                 
-                api_url_state = f"{api_base_url}{api_key}/desks/{mac_address}/state/"
-                put_response = requests.get(api_url_state, data=state)
-                put_response.raise_for_status()
+            api_url_state = f"{api_base_url}{api_key}/desks/{mac_address}/state/"
+            put_response = requests.get(api_url_state, data=state)
+            put_response.raise_for_status()
+
+            desk, created = Desk.objects.get_or_create(mac_address=mac_address,)
+            desk.state_data = response.get('state', {}).get('position_mm', 'Unknown')
+            desk.save()
 
         return JsonResponse({"results": results})
     except ConnectionError:
