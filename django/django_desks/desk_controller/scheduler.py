@@ -10,7 +10,7 @@ def start_scheduler():
                 fetch_all_desk_states()
             except Exception as e:
                 print(f"Error in scheduled task: {e}")
-            time.sleep(60)
+            time.sleep(5)
 
     thread = threading.Thread(target=fetch_task, daemon=True)
     thread.start()

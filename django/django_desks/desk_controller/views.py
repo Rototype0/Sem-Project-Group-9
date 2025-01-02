@@ -66,7 +66,7 @@ def desk_state_update(mac_address, position_mm):
     response = requests.put(api_url, json=state)
     #response.raise_for_status()
 
-def update_all_desk_states():
+def fetch_all_desk_states():
     api_base_url = "http://localhost:8000/api/v2/"
     api_key = "E9Y2LxT4g1hQZ7aD8nR3mWx5P0qK6pV7"
     api_url = f"{api_base_url}{api_key}/desks/"
@@ -77,25 +77,16 @@ def update_all_desk_states():
         desks = response.json()
 
         results = {} 
+        state = '{"position_mm"}' 
 
-        for desk_id, mac_address in enumerate(desks, start=1):
-            try:
+        for mac_address in enumerate(desks, start=1):
                 
                 api_url_state = f"{api_base_url}{api_key}/desks/{mac_address}/state/"
-                put_response = requests.put(api_url_state, data=state)
+                put_response = requests.get(api_url_state, data=state)
                 put_response.raise_for_status()
-
-                get_response = requests.get(api_url_state)
-                get_response.raise_for_status()
-                updated_data = get_response.json()
-
-                results[f"desk_{desk_id}_state"] = updated_data
-            except Exception as e:
-                results[f"desk_{desk_id}_error"] = str(e)
 
         return JsonResponse({"results": results})
     except ConnectionError:
         return JsonResponse({"error": "Unable to connect to the API server. Please try again later."}, status=404)
-    except RequestException as e:
+    except Exception as e:
         return JsonResponse({"error": f"An error occurred: {str(e)}"}, status=500)
-
