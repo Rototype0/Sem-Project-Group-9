@@ -80,7 +80,7 @@ def fetch_and_update_desks():
     try:
         if isinstance(desks, list):
             for desk_name in desks:
-                mac_address = desk_name  # Assuming desk_name is the mac_address
+                mac_address = desk_name
                 second_api_url = f"{api_base_url}{api_key}/desks/{mac_address}/state"
                 second_response = requests.get(second_api_url)
                 second_response.raise_for_status()
