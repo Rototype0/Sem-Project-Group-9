@@ -74,17 +74,20 @@ def fetch_and_update_desks():
     response = requests.get(api_url)
     response.raise_for_status()
     desks = response.json()
-    try: 
-        if isinstance(desks, list): 
-            for index, mac_address in enumerate(desks): 
+    
+    desk_dict = {f"desk_{i+1}": desk for i, desk in enumerate(desks)}
+
+    try:
+        if isinstance(desks, list):
+            for desk_name in desks:
+                mac_address = desk_name  # Assuming desk_name is the mac_address
                 second_api_url = f"{api_base_url}{api_key}/desks/{mac_address}/state"
                 second_response = requests.get(second_api_url)
                 second_response.raise_for_status()
                 desk_details = second_response.json()
-            
-                desk, created = Desk.objects.get_or_create(mac_address=mac_address, defaults={"name": desk_details.get("name")})
 
-                desk.update_state_data({"timestamp": datetime.now().isoformat(), "position_mm": position_mm})
+                desk, created = Desk.objects.get_or_create(mac_address=mac_address, defaults={"name": desk_details.get("name", "Unknown")})
+                desk.state_data({"timestamp": datetime.datetime.now().isoformat(), "position_mm": desk_details.get("state", {}).get("position_mm", "Unknown")})
 
     except requests.RequestException as e:
         print(f"Failed to fetch desk data: {e}")
