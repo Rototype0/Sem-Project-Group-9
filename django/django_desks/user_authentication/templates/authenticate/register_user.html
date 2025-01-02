@@ -16,10 +16,8 @@
     <h1>Register</h1>
 <br/>
     <form action="{% url 'register_user' %}" method='post'>
-        {% csrf_token %}
-        
         {{ form.as_p }}
-            
+        {% csrf_token %}  
         <br/>
 
         <input type="submit" value="Submit" class="btn btn-secondary">
