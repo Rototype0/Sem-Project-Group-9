@@ -1,13 +1,13 @@
 import threading
 import time
-from .views import fetch_all_desk_states
+from .views import fetch_and_update_desks
 
 def start_scheduler():
     def fetch_task():
         while True:
             try:
                 print("Fetching and updating desks...")
-                fetch_all_desk_states()
+                fetch_and_update_desks()
             except Exception as e:
                 print(f"Error in scheduled task: {e}")
             time.sleep(5)
