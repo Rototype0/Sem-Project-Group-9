@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from user_authentication.models import DeskUserProfile, User
 from desk_controller.views import desk_state_update, fetch_desks, connect_to_pico
+import threading
 
 # Create your views here.
 
@@ -66,6 +67,9 @@ def dashboard(request):
                     print("no name found")
 
         context.update({'current_selected_desk_mac_address': current_user.current_selected_desk_mac_address})
+
+        threading.Thread(target=connect_to_pico, daemon=True, args=["10.96.81.205", current_user.current_selected_desk_mac_address]).start()
+
         connect_to_pico("10.96.81.205", current_user.current_selected_desk_mac_address)
         print("done")
         return render(request, 'home/dashboard.html', context)
