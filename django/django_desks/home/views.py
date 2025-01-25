@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from user_authentication.models import DeskUserProfile, User
-from desk_controller.views import desk_state_update, fetch_desks
+from desk_controller.views import desk_state_update, fetch_desks, connect_to_pico
 
 # Create your views here.
 
@@ -14,6 +14,7 @@ def select_desk(request):
 
 def dashboard(request):
     if request.user.is_authenticated:
+        
         current_user = DeskUserProfile.objects.get(user=User.objects.get(id=request.user.id))
         context ={
             'height1': current_user.height1_cm,
@@ -65,6 +66,7 @@ def dashboard(request):
                     print("no name found")
 
         context.update({'current_selected_desk_mac_address': current_user.current_selected_desk_mac_address})
+        connect_to_pico("10.96.81.205", current_user.current_selected_desk_mac_address)
         print("done")
         return render(request, 'home/dashboard.html', context)
     else:

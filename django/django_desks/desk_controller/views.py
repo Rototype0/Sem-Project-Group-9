@@ -37,21 +37,30 @@ def desk_info(request, mac_address):
         return JsonResponse(desk_details)
 
 
-def connect_to_pico(server_host_ip):
+def connect_to_pico(server_host_ip, current_desk_mac_address):
     server_port = 4242      # Use the port number the server is listening on
     # Create a socket object
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    
+    api_base_url = "http://localhost:50/api/v2/"
+    api_key = "E9Y2LxT4g1hQZ7aD8nR3mWx5P0qK6pV7"
+    api_url = f"{api_base_url}{api_key}/desks/{current_desk_mac_address}/state"
+
+    response = requests.get(api_url)
+    response.raise_for_status()
+    desk_details = response.json()
+    print(int(desk_details.get('position_mm')/10))
+
 
     # Connect to the server
     client_socket.connect((server_host_ip, server_port))
     print(f"Connected to server {server_host_ip}:{server_port}")
     client_socket.send(b'\x01')
-    for i in range(10):
+    while True:
         msg = client_socket.recv(28)
         btn_state, pressed, pressed_since_last, potentiometer, light_intensity, temp, humidity = struct.unpack("<BxxxIIffff", msg)
         print(btn_state, pressed, pressed_since_last, potentiometer, light_intensity, temp, humidity)
-        if i % 6 == 0:
-            client_socket.send(b'\x05')
+        client_socket.send(bytes([int(desk_details.get('position_mm')/10)]))
     client_socket.send(b'\x02')
     time.sleep(2)
     client_socket.close()
