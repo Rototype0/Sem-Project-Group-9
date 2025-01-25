@@ -4,7 +4,6 @@ from django.http import JsonResponse
 import socket
 import time
 import struct
-import threading
 
 def fetch_desks():
     api_base_url = "http://localhost:50/api/v2/"
@@ -35,8 +34,6 @@ def desk_info(request, mac_address):
         desk_details = response.json()
 
         return JsonResponse(desk_details)
-
-threading.Thread(target=connect_to_pico)
 
 def connect_to_pico(server_host_ip, current_desk_mac_address):
     server_port = 4242      # Use the port number the server is listening on
